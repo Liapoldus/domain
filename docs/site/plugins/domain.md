@@ -7,7 +7,7 @@ Plugin SDK REST `Reload` и exact-generation pull. Core не знает сущн
 
 ## Конфигурация и миграции
 
-Нормативная [схема модели](../../../contracts/v1/model.schema.json) находится
+Нормативная [схема модели](https://github.com/Liapoldus/domain/blob/main/contracts/v1/model.schema.json) находится
 в этом репозитории. Сущность имеет одного владельца-группу; изменяемые поля
 описываются типом и ограничениями. Сначала строится план миграции без записи
 данных. Добавление nullable-поля или поля с default безопасно. Rename или
@@ -53,6 +53,6 @@ SQL. SQL-записи, подзапросы, оконные функции и н
 reopen и откат транзакции при ошибке. Raft FSM и quorum/failover проверены
 только через тестовый in-memory transport; production durable log store,
 peer transport через `pluginprotocol`, кластерный rollback и peer API остаются открытыми задачами в
-[TODO](../../../TODO.md); этот документ описывает целевое v2-поведение, а не
+[TODO](https://github.com/Liapoldus/domain/blob/main/TODO.md); этот документ описывает целевое v2-поведение, а не
 объявляет его работающим. Все незавершённые пункты относятся к общему v2;
 `contracts/v1` — версия собственного контракта плагина, не обещание релиза Liapoldus v1.
