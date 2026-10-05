@@ -1,0 +1,16 @@
+{
+  "name": "domain",
+  "configuration": {
+    "schemaVersion": "1",
+    "schema": "contracts/v1/model.schema.json"
+  },
+  "capabilities": [
+    { "name": "domain.create", "mode": "call" },
+    { "name": "domain.get", "mode": "call" },
+    { "name": "domain.update", "mode": "call" },
+    { "name": "domain.delete", "mode": "call" },
+    { "name": "domain.batch", "mode": "call" },
+    { "name": "domain.query", "mode": "call" },
+    { "name": "domain.cluster.status", "mode": "call" }
+  ]
+}
