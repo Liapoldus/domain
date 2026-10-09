@@ -1,3 +1,4 @@
+// Package models defines Domain data and command models.
 package models
 
 type Model struct {

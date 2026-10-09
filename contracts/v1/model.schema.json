@@ -4,69 +4,141 @@
   "title": "Domain v1 settings",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "entities"],
+  "required": [
+    "schemaVersion",
+    "entities"
+  ],
   "properties": {
-    "schemaVersion": { "const": "1" },
     "entities": {
       "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      },
       "minItems": 1,
-      "maxItems": 256,
-      "items": { "$ref": "#/$defs/entity" }
+      "maxItems": 256
     },
     "migrations": {
       "type": "array",
-      "maxItems": 512,
-      "items": { "$ref": "#/$defs/mapping" }
+      "items": {
+        "$ref": "#/$defs/mapping"
+      },
+      "maxItems": 512
+    },
+    "schemaVersion": {
+      "const": "1"
     }
   },
   "$defs": {
-    "identifier": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$" },
-    "field": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["name", "type"],
-      "properties": {
-        "name": { "$ref": "#/$defs/identifier" },
-        "type": { "enum": ["text", "int64", "decimal", "bool", "timestamp", "bytes"] },
-        "primaryKey": { "type": "boolean" },
-        "required": { "type": "boolean" },
-        "unique": { "type": "boolean" },
-        "default": { "type": ["string", "integer", "number", "boolean", "null"] },
-        "references": {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["entity", "field"],
-          "properties": {
-            "entity": { "$ref": "#/$defs/identifier" },
-            "field": { "$ref": "#/$defs/identifier" }
-          }
-        }
-      }
-    },
     "entity": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "ownerGroup", "fields"],
+      "required": [
+        "name",
+        "ownerGroup",
+        "fields"
+      ],
       "properties": {
-        "name": { "$ref": "#/$defs/identifier" },
-        "ownerGroup": { "$ref": "#/$defs/identifier" },
         "fields": {
           "type": "array",
+          "items": {
+            "$ref": "#/$defs/field"
+          },
           "minItems": 1,
-          "maxItems": 128,
-          "items": { "$ref": "#/$defs/field" }
+          "maxItems": 128
+        },
+        "name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "ownerGroup": {
+          "$ref": "#/$defs/identifier"
         }
       }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "default": {
+          "type": [
+            "string",
+            "integer",
+            "number",
+            "boolean",
+            "null"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "primaryKey": {
+          "type": "boolean"
+        },
+        "references": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "entity",
+            "field"
+          ],
+          "properties": {
+            "entity": {
+              "$ref": "#/$defs/identifier"
+            },
+            "field": {
+              "$ref": "#/$defs/identifier"
+            }
+          }
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "type": {
+          "enum": [
+            "text",
+            "int64",
+            "decimal",
+            "bool",
+            "timestamp",
+            "bytes"
+          ]
+        },
+        "unique": {
+          "type": "boolean"
+        }
+      }
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
     },
     "mapping": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["entity", "from", "to"],
+      "required": [
+        "entity",
+        "from",
+        "to"
+      ],
       "properties": {
-        "entity": { "$ref": "#/$defs/identifier" },
-        "from": { "$ref": "#/$defs/identifier" },
-        "to": { "$ref": "#/$defs/identifier" },
-        "conversion": { "enum": ["parseInt64", "formatInt64"] }
+        "conversion": {
+          "enum": [
+            "parseInt64",
+            "formatInt64"
+          ]
+        },
+        "entity": {
+          "$ref": "#/$defs/identifier"
+        },
+        "from": {
+          "$ref": "#/$defs/identifier"
+        },
+        "to": {
+          "$ref": "#/$defs/identifier"
+        }
       }
     }
   }

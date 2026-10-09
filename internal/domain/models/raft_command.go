@@ -13,4 +13,15 @@ type RaftCommand struct {
 	Entity   string          `json:"entity,omitempty"`
 	ID       string          `json:"id,omitempty"`
 	Row      json.RawMessage `json:"row,omitempty"`
+	WriteID  string          `json:"writeId,omitempty"`
+	Group    string          `json:"group,omitempty"`
+	Ops      []RaftCommand   `json:"ops,omitempty"`
+	Epoch    int64           `json:"epoch,omitempty"`
+}
+
+// ApplyResult reports the durable outcome of one applied FSM entry. It is
+// returned for every success (including replays and writeId deduplication);
+// failures are returned as errors instead.
+type ApplyResult struct {
+	Duplicate bool `json:"duplicate"`
 }

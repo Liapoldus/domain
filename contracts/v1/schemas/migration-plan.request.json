@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/migration-plan.request.json",
+  "title": "domain migration plan request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "next"
+  ],
+  "properties": {
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "next": {
+      "$ref": "../model.schema.json"
+    }
+  }
+}

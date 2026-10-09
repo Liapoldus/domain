@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/migration-status.response.json",
+  "title": "domain migration status response data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "epoch",
+    "appliedIndex",
+    "fingerprint",
+    "snapshotAvailable",
+    "audit"
+  ],
+  "properties": {
+    "appliedIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "audit": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/auditEntry"
+      }
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "snapshotAvailable": {
+      "type": "boolean"
+    },
+    "snapshotFingerprint": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "auditEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "writeId",
+        "epochBefore",
+        "epochAfter",
+        "fingerprintBefore",
+        "fingerprintAfter"
+      ],
+      "properties": {
+        "epochAfter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "epochBefore": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fingerprintAfter": {
+          "type": "string"
+        },
+        "fingerprintBefore": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "migrate",
+            "rollback"
+          ]
+        },
+        "writeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,64}$"
+        }
+      }
+    }
+  }
+}

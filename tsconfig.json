@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "types": ["node", "vitest"],
+    "skipLibCheck": false
+  },
+  "include": ["tests/**/*.ts", "eslint.config.mjs"]
+}

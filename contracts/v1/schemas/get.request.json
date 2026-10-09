@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/get.request.json",
+  "title": "domain.get request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entity",
+    "id"
+  ],
+  "properties": {
+    "entity": {
+      "$ref": "#/$defs/identifier"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "forwardedScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tenant",
+        "site",
+        "group"
+      ],
+      "properties": {
+        "group": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "site": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "tenant": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+    }
+  }
+}

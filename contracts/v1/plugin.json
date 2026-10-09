@@ -5,12 +5,104 @@
     "schema": "contracts/v1/model.schema.json"
   },
   "capabilities": [
-    { "name": "domain.create", "mode": "call" },
-    { "name": "domain.get", "mode": "call" },
-    { "name": "domain.update", "mode": "call" },
-    { "name": "domain.delete", "mode": "call" },
-    { "name": "domain.batch", "mode": "call" },
-    { "name": "domain.query", "mode": "call" },
-    { "name": "domain.cluster.status", "mode": "call" }
-  ]
+    {
+      "name": "domain.create",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/create.request.json",
+      "responseSchema": "contracts/v1/schemas/write.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 15000
+    },
+    {
+      "name": "domain.get",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/get.request.json",
+      "responseSchema": "contracts/v1/schemas/get.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 10000
+    },
+    {
+      "name": "domain.update",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/update.request.json",
+      "responseSchema": "contracts/v1/schemas/write.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 15000
+    },
+    {
+      "name": "domain.delete",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/delete.request.json",
+      "responseSchema": "contracts/v1/schemas/write.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 15000
+    },
+    {
+      "name": "domain.batch",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/batch.request.json",
+      "responseSchema": "contracts/v1/schemas/batch.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 2097152,
+      "timeoutMs": 30000
+    },
+    {
+      "name": "domain.query",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/query.request.json",
+      "responseSchema": "contracts/v1/schemas/query.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 10000
+    },
+    {
+      "name": "domain.cluster.status",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/cluster-status.request.json",
+      "responseSchema": "contracts/v1/schemas/status.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 3000
+    },
+    {
+      "name": "domain.migration.plan",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/migration-plan.request.json",
+      "responseSchema": "contracts/v1/schemas/migration-plan.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 15000
+    },
+    {
+      "name": "domain.migration.status",
+      "mode": "call",
+      "payloadSchema": "contracts/v1/schemas/migration-status.request.json",
+      "responseSchema": "contracts/v1/schemas/migration-status.response.json",
+      "errorSchema": "contracts/v1/schemas/envelope.json",
+      "maxPayloadBytes": 1048576,
+      "timeoutMs": 10000
+    }
+  ],
+  "compatibility": {
+    "raftLogCommandKinds": [
+      "init",
+      "put",
+      "migrate",
+      "rollback",
+      "create",
+      "update",
+      "delete",
+      "batch"
+    ],
+    "fsmSnapshotFormatVersion": 2,
+    "erSchemaVersion": "1",
+    "peerContracts": [
+      "liapoldus.domain.raft-peer.v1",
+      "liapoldus.domain.product-peer.v1"
+    ]
+  }
 }

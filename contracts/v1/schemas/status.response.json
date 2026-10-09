@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/status.response.json",
+  "title": "domain.cluster.status response data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ready",
+    "leader",
+    "leaderAddress",
+    "term",
+    "commitIndex",
+    "appliedIndex",
+    "voters",
+    "quorum",
+    "epoch"
+  ],
+  "properties": {
+    "appliedIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "commitIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "leader": {
+      "type": "string"
+    },
+    "leaderAddress": {
+      "type": "string"
+    },
+    "quorum": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ready": {
+      "type": "boolean"
+    },
+    "term": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "voters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+version: "2"
+run:
+  timeout: 5m
+  concurrency: 1
+  tests: true
+  modules-download-mode: readonly
+linters:
+  default: none
+  enable:
+    - bodyclose
+    - contextcheck
+    - copyloopvar
+    - durationcheck
+    - errcheck
+    - errorlint
+    - gosec
+    - govet
+    - ineffassign
+    - nilerr
+    - noctx
+    - nolintlint
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - unused
+    - usetesting
+  settings:
+    errcheck:
+      check-blank: true
+      check-type-assertions: true
+      disable-default-exclusions: true
+    errorlint:
+      errorf: true
+      asserts: true
+      comparison: true
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+      allow-unused: false
+    staticcheck:
+      checks: [all]
+  exclusions:
+    generated: disable
+    presets: []
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  new: false

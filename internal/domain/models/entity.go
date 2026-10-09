@@ -13,5 +13,12 @@ type Field struct {
 	Type       string          `json:"type"`
 	PrimaryKey bool            `json:"primaryKey,omitempty"`
 	Required   bool            `json:"required,omitempty"`
+	Unique     bool            `json:"unique,omitempty"`
 	Default    json.RawMessage `json:"default,omitempty"`
+	References *Reference      `json:"references,omitempty"`
+}
+
+type Reference struct {
+	Entity string `json:"entity"`
+	Field  string `json:"field"`
 }

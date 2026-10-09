@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/envelope.json",
+  "title": "Domain v1 response envelope",
+  "description": "Both directions of the product peer call: success carries data, business failure carries a structured error inside the payload.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ok"
+  ],
+  "properties": {
+    "data": {
+      "type": "object"
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "retryable",
+        "unknownOutcome",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "invalid_request",
+            "forbidden",
+            "not_found",
+            "conflict",
+            "not_leader",
+            "unavailable",
+            "unknown_outcome",
+            "query_rejected",
+            "internal",
+            "epoch_mismatch"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "unknownOutcome": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ok": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "ok",
+          "data"
+        ],
+        "not": {
+          "required": [
+            "error"
+          ]
+        }
+      },
+      "else": {
+        "required": [
+          "ok",
+          "error"
+        ],
+        "not": {
+          "required": [
+            "data"
+          ]
+        }
+      }
+    }
+  ]
+}

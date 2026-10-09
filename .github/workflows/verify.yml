@@ -1,0 +1,53 @@
+name: Verify Domain
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Domain strict quality and reproducibility
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      GOWORK: "off"
+      GOFLAGS: "-p=1"
+      GOTOOLCHAIN: go1.26.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: make check
+  linux-raft-os-partition:
+    name: Linux Raft OS partition (required capability)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install test dependencies
+        run: npm ci
+      - name: Require OS-level Raft partition acceptance
+        env:
+          DOMAIN_REQUIRE_OS_PARTITION: "1"
+          GOTOOLCHAIN: go1.26.0
+          GOWORK: "off"
+          GOFLAGS: "-p=1"
+        run: sudo -E ./node_modules/.bin/vitest run tests/raft-peer-network-partition.test.ts --maxWorkers=1

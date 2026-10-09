@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "liapoldus.domain.raft-peer.v1",
+  "security": "mutualTLS",
+  "methods": {
+    "appendEntries": {
+      "name": "liapoldus.domain.raft.v1.append-entries",
+      "mode": "call",
+      "maxPayloadBytes": 4194304,
+      "timeoutMs": 10000,
+      "heartbeat": "appendEntries with no log entries"
+    },
+    "requestVote": {
+      "name": "liapoldus.domain.raft.v1.request-vote",
+      "mode": "call",
+      "maxPayloadBytes": 4194304,
+      "timeoutMs": 10000
+    },
+    "requestPreVote": {
+      "name": "liapoldus.domain.raft.v1.request-pre-vote",
+      "mode": "call",
+      "maxPayloadBytes": 4194304,
+      "timeoutMs": 10000
+    },
+    "timeoutNow": {
+      "name": "liapoldus.domain.raft.v1.timeout-now",
+      "mode": "call",
+      "maxPayloadBytes": 4194304,
+      "timeoutMs": 10000
+    },
+    "installSnapshot": {
+      "name": "liapoldus.domain.raft.v1.install-snapshot",
+      "mode": "stream",
+      "maxStreamMessageBytes": 1048576,
+      "chunkBytes": 262144,
+      "maxBytes": 536870912,
+      "timeoutMs": 600000,
+      "firstFrame": "InstallSnapshotRequest JSON",
+      "remainingFrames": "snapshot bytes"
+    }
+  },
+  "appendEntriesPipeline": "unsupported; callers fall back to unary appendEntries"
+}

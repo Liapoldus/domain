@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/migration-plan.response.json",
+  "title": "domain migration plan response data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "safe",
+    "epoch",
+    "appliedIndex",
+    "fingerprint",
+    "fingerprintAfter"
+  ],
+  "properties": {
+    "appliedIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "fingerprint": {
+      "type": "string"
+    },
+    "fingerprintAfter": {
+      "type": "string"
+    },
+    "planError": {
+      "enum": [
+        "destructive_change",
+        "ownership_change",
+        "mapping_required",
+        "invalid_mapping",
+        "invalid_model"
+      ]
+    },
+    "safe": {
+      "type": "boolean"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/step"
+      }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "entity"
+      ],
+      "properties": {
+        "entity": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "addEntity",
+            "renameField",
+            "convertField",
+            "addField"
+          ]
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

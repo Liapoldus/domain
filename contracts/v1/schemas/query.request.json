@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/query.request.json",
+  "title": "domain.query request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sql"
+  ],
+  "properties": {
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "forwardedScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tenant",
+        "site",
+        "group"
+      ],
+      "properties": {
+        "group": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "site": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "tenant": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "maxRows": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "params": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scalar"
+      },
+      "maxItems": 64
+    },
+    "sql": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192
+    }
+  },
+  "$defs": {
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean",
+        "null"
+      ]
+    }
+  }
+}

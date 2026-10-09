@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/delete.request.json",
+  "title": "domain.delete request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "entity",
+    "id"
+  ],
+  "properties": {
+    "entity": {
+      "$ref": "#/$defs/identifier"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "writeId": {
+      "$ref": "#/$defs/writeId"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+    },
+    "writeId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$"
+    }
+  }
+}

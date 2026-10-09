@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/query.response.json",
+  "title": "domain.query response data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "columns",
+    "rows",
+    "rowCount",
+    "appliedIndex",
+    "epoch"
+  ],
+  "properties": {
+    "appliedIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rowCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/$defs/scalar"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean",
+        "null"
+      ]
+    }
+  }
+}

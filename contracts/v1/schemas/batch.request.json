@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/batch.request.json",
+  "title": "domain.batch request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ops"
+  ],
+  "properties": {
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ops": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/op"
+      },
+      "minItems": 1,
+      "maxItems": 100
+    },
+    "writeId": {
+      "$ref": "#/$defs/writeId"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+    },
+    "op": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op",
+        "entity",
+        "id"
+      ],
+      "properties": {
+        "entity": {
+          "$ref": "#/$defs/identifier"
+        },
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "op": {
+          "type": "string",
+          "enum": [
+            "create",
+            "update",
+            "delete"
+          ]
+        },
+        "row": {
+          "$ref": "#/$defs/row"
+        }
+      }
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/scalar"
+      }
+    },
+    "scalar": {
+      "type": [
+        "string",
+        "number",
+        "boolean",
+        "null"
+      ]
+    },
+    "writeId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$"
+    }
+  }
+}

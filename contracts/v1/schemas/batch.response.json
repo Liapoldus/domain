@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/batch.response.json",
+  "title": "domain.batch response data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "duplicate",
+    "applied",
+    "appliedIndex",
+    "epoch"
+  ],
+  "properties": {
+    "applied": {
+      "type": "boolean"
+    },
+    "appliedIndex": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "duplicate": {
+      "type": "boolean"
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "writeId": {
+      "$ref": "#/$defs/writeId"
+    }
+  },
+  "$defs": {
+    "writeId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$"
+    }
+  }
+}

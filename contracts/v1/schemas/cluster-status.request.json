@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://liapoldus.github.io/spec/domain/v1/schemas/cluster-status.request.json",
+  "title": "domain.cluster.status request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [],
+  "properties": {}
+}
